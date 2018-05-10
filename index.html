@@ -9,14 +9,18 @@
     
     <style>
        .footer {
-            position: fixed;
             left: 0;
             bottom: 0;
             width: 100%;
+            height: 65px;
             background-color:aqua;
             color: white;
             text-align: center;
             }
+        #footer-Text{
+            margin-top: 15px;
+        
+        }
         .header{
             background-color: aqua;
         }
@@ -28,6 +32,20 @@
         form{
             margin-left: 5px;
         }
+
+        .main-container{
+            /* background: url("https://www.mybanktracker.com/blog/find-my-answers/health-insurance-how-to-know-if-covered-260326"); */
+            background: url("medical-doctor-woman-backgrounds-wallpapers.jpg");
+
+            
+
+        }
+        .slide-show{
+            height: 500px;
+            background: url("assets/images/heart-and-stethoscope-1.jpg");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
         
     </style>
 </head>
@@ -37,40 +55,77 @@
                         <div class="col-md-12">
                                 <nav class="navbar navbar-light bg-primary">
                                         <a class="navbar-brand" href="#">
-                                            <img src="assets/images/2a32a7eb-1506-468b-a3bf-bb2798051cb4.png" width="70" height="70" class="d-inline-block align-top" alt="">
+                                            <img src="assets/images/2a32a7eb-1506-468b-a3bf-bb2798051cb4.png" width="100" height="100" class="d-inline-block align-top" alt="">
                                         </a>
                                 </nav>
             
                         </div>
                     </div><br>
         </header>
+        <div class="container">
+                <main>
+                    <div class="slide-show">
 
-        <main>
-                <form>
-                        <div class="form-row">
-                          <div class="form-group col-md-6">
-                            <label for="inputEmail4">Location</label>
-                            <input type="email" class="form-control" id="inputEmail4" placeholder="Location">
-                          </div>
-                          <div class="form-group col-md-6">
-                            <label for="inputPassword4">Practice</label>
-                            <input type="password" class="form-control"  placeholder="Practice">
-                          </div>
-                        </div><br>
-                       
-                        
-                      </form>
-                      
-                            
-        </main>
-        
+                    </div>
+                        <form>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                    <label for="inputEmail4">Query</label>
+                                    <input type="email" class="form-control" id="inputEmail4" placeholder="Query">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                        <label for="inputPassword4">Insurance</label>
+                                        <input type="text" class="form-control"  placeholder="Insurance">
+                                        </div>
+                                    </div>
+                                <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                                <label for="inputPassword4">Limit</label>
+                                                <input type="number" class="form-control"  placeholder="e.g. 5">
+                                         </div>
+
+                                        <div class="form-group col-md-6">
+                                            
+                                            <!-- <input type="email" class="form-control" id="inputEmail4" placeholder="e.g. Male"> -->
+                                        </div>
+                                       
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                             <p>Gender</p>
+                                            <select class="custom-select" required>
+                                            
+                                            <option value="">e.g. male</option>
+                                            <option value="1">Male</option>
+                                            <option value="2">Female</option>
+                                            </select>
+                                         </div>
+                                    </div>
+                                </div>
+                               
+                               
+                                
+                                
+                        </form>
+
+                        <div class="maps"></div>
+                                  
+                                        
+                </main>
+                    
+
+        </div>
+       
     
                 
             
         
    
     <div class="footer">
-            <p>Footer</p>
+            <p id="footer-Text"><b>Footer</b></p>
     </div>        
     <script src="assets/javascript/app.js"></script>
 </body>
