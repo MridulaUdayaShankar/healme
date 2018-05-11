@@ -4,7 +4,7 @@
      bottom: 0;
      width: 100%;
      height: 65px;
-     background-color:blue;
+     background-color:aqua;
      color: white;
      text-align: center;
      }
@@ -12,8 +12,9 @@
      margin-top: 15px;
  
  }
- .header{
-     /* background-color: aqua; */
+ header{
+     background-color: aqua;
+     margin:0px 0px 10px 0px;
  }
 
  .navbar-brand{
@@ -25,11 +26,6 @@
  }
 
  .main-container{
-     /* background: url("https://www.mybanktracker.com/blog/find-my-answers/health-insurance-how-to-know-if-covered-260326"); */
-     /* background: url("medical-doctor-woman-backgrounds-wallpapers.jpg"); */
-
-     
-
  }
  .slide-show{
      height: 500px;
