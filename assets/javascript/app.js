@@ -3,11 +3,11 @@ $("btn-submit").on("click", function(event) {
   event.preventDefault();
 
   // Grab user input
-  var distanceFrom  = $("#").val().trim();
-  var displayList = $("#").val().trim();
-  var injuryEvent = $("#").val().trim();
-  var sortPreference = $("#").val().trim();
-  var doctorGender = $("#").val().trim();
+  var distanceFrom  = $("#input-symptoms").val().trim();
+  var displayList = $("#number-Of-Doc").val().trim();
+  var injuryEvent = $("#search-input").val().trim();
+  var sortPreference = $("#sort-input").val().trim();
+  var doctorGender = $("#gender-input").val().trim();
 
   // Translate Option Menus to Text
   if(doctorGender === 1){
@@ -41,11 +41,11 @@ $("btn-submit").on("click", function(event) {
   console.log(newUser.gender);
 
   // Clears all of the text-boxes
-  $("#").val("");
-  $("#").val("");
-  $("#").val("");
-  $("#").val("");
-  $("#").val("");
+  $("#input-symptoms").val("");
+  $("#number-Of-Doc").val("");
+  $("#search-input").val("");
+  $("#sort-input").val("");
+  $("#gender-input").val("");
 
   getLocation();
 
@@ -123,7 +123,7 @@ var betterDoctor = function(position){
       }
       var tels[i] = practArr.concat(', ')
 
-      $("#train-list > tbody").append("<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + specs[i] + "</td><td>" +
+      $("#table-list > tbody").append("<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + specs[i] + "</td><td>" +
       ins[i] + "</td><td>" + loc[i] + "</td><td>" + tels[i] + "</td></tr>");
     }
 
