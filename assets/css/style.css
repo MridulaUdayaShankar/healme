@@ -1,0 +1,45 @@
+
+.footer {
+     left: 0;
+     bottom: 0;
+     width: 100%;
+     height: 65px;
+     background-color:blue;
+     color: white;
+     text-align: center;
+     }
+ #footer-Text{
+     margin-top: 15px;
+ 
+ }
+ .header{
+     /* background-color: aqua; */
+ }
+
+ .navbar-brand{
+     margin-left: 20px;
+ 
+ }
+ form{
+     margin-left: 5px;
+ }
+
+ .main-container{
+     /* background: url("https://www.mybanktracker.com/blog/find-my-answers/health-insurance-how-to-know-if-covered-260326"); */
+     /* background: url("medical-doctor-woman-backgrounds-wallpapers.jpg"); */
+
+     
+
+ }
+ .slide-show{
+     height: 500px;
+     background: url("../images/heart-and-stethoscope-1.jpg");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+     margin-bottom: 30px;
+ }
+
+ form{
+     margin-bottom: 30px;
+ }
+ 
