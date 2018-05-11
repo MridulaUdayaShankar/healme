@@ -66,8 +66,3 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     }
 });
 
-// auth.signWithEmailAndPassword(email, pass);
-
-// auth.createUserWithEmailAndPassword(email, pass);
-
-// auth.onAuthStateChanged(firebaseUser =>{});
