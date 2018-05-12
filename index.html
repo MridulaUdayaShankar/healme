@@ -1,42 +1,40 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Heal Me</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css"  href="assets/css/style.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="assets/javascript/js.js"></script>
-   
-</head>
-<body>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Heal Me</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css"  href="assets/css/style.css" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    </head>
+
     <header>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <nav>
-                        <a class="navbar-brand" href="#">
-                        <img src="assets/images/2a32a7eb-1506-468b-a3bf-bb2798051cb4.png" width="100" height="100" class="d-inline-block align-top" alt="">
-                        </a>
+                    <a class="navbar-brand" href="#">
+                    <img src="assets/images/2a32a7eb-1506-468b-a3bf-bb2798051cb4.png" width="100" height="100" class="d-inline-block align-top" alt="">
+                    </a>
                     </nav>
                 </div>
             </div>
         </div>
     </header>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleControls" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleControls" data-slide-to="2"></li>
-                        <li data-target="#carouselExampleControls" data-slide-to="3"></li>
-                    </ol>
-                    <div class="carousel-inner">
+
+    <body>
+    
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleControls" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleControls" data-slide-to="2"></li>
+                            <li data-target="#carouselExampleControls" data-slide-to="3"></li>
+                        </ol>
+                        <div class="carousel-inner">
                         <div class="carousel-item active">
                         <img class="d-block w-100" src="assets/images/1.jpg" alt="First slide">
                         <div class="carousel-caption d-none d-md-block">
@@ -91,34 +89,20 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="range">Range Of Search</label>
-                        <input type="number" class="form-control" id="search-input" placeholder="e.g 5 miles away">
+                        <label for="range">Range Of Search (miles)</label>
+                        <input type="number" class="form-control" id="search-input" placeholder="e.g 5">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <h3>Gender of Physician</h3>
-                            <select class="custom-select" id="gender-input"required>
-                            
-                                <option value="">e.g. male</option>
-                                <option value="1">Male</option>
-                                <option value="2">Female</option>
-                            </select>
-                        </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="gender">Gender of Physician (male or female)</label>
+                        <input type="text" class="form-control" id="gender-input" placeholder="e.g male">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <p>Sort In Descending Order By</p>
-                            <select class="custom-select" id="sort-input" required>
-                            <option value="">e.g. Best Match</option>
-                            <option value="1">Best Match</option>
-                            <option value="2">Rating</option>
-                            <option value="3">Proximity</option>
-                            </select>
-                        </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="sort">Sort in Descending Order By (best-match-desc, rating-desc, distance-asc)</label>
+                        <input type="text" class="form-control" id="sort-input" placeholder="e.g best-match-desc">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary" id="btn-submit">Submit</button>
@@ -134,9 +118,9 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Description of Specialty</th>
-                                <th>Insurance Type Accepted</th>
                                 <th>Location</th>
                                 <th>Phone Number</th>  
+                                <th>Website</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -159,9 +143,12 @@
             </div>      
         </div>
     </footer>
-     
-    
-    <script src="assets/javascript/app.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
     <script src="assets/javascript/js.js"></script>
+    <script src="assets/javascript/app.js"></script>
 </body>
 </html>
