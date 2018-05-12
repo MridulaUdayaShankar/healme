@@ -38,7 +38,7 @@
                         <div class="carousel-item active">
                         <img class="d-block w-100" src="assets/images/1.jpg" alt="First slide">
                         <div class="carousel-caption d-none d-md-block">
-                            <h3>Have the freedom of receiving the best medical treatment wherever you are in America.</h3>
+                            <h3>Receive the best medical treatment wherever you are in America.</h3>
                         </div>
                         </div>
                         <div class="carousel-item">
@@ -50,7 +50,7 @@
                         <div class="carousel-item">
                         <img class="d-block w-100" src="assets/images/3.jpg" alt="Third slide">
                         <div class="carousel-caption d-none d-md-block">
-                            <h3>You can now travel in peace with heal.me, which provides you with the best medical treatment for wherever you are and whatever you are going through in your life.</h3>
+                            <h3>With heal.me, you can now travel in peace for it provides you with the best medical treatment for wherever you are and whatever you are going through in your life.</h3>
                         </div>
                         </div>
                         <div class="carousel-item">
@@ -77,40 +77,59 @@
                 <form>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="inputEmail4">Symptoms</label>
+                        <h3 for="inputEmail4">Symptoms</h3>
                         <input type="text" class="form-control" id="input-symptoms" placeholder="e.g Ankle strain">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="numberOfDoc">Number Of Doctors to Display</label>
+                        <h3 for="numberOfDoc">Number Of Doctors to Display</h3>
                         <input type="number" class="form-control" id="number-Of-Doc" placeholder="e.g. 5">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="range">Range Of Search (miles)</label>
+                        <h3 for="range">Range Of Search (miles)</h3>
                         <input type="number" class="form-control" id="search-input" placeholder="e.g 5">
                     </div>
                 </div>
-                <div class="form-row">
+<!--                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="gender">Gender of Physician (male or female)</label>
                         <input type="text" class="form-control" id="gender-input" placeholder="e.g male">
                     </div>
-                </div>
+                </div> -->
                 <div class="form-row">
+                    <div class= "form-group col-md-6">
+                            <h3>Gender of Physician</h3>
+                            <select class="custom-select" id="gender-input"required>
+                                <option value="female">Female</option>
+                                <option value="male">Male</option>
+                            </select>
+                        </div>
+                    </div>
+<!--                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="sort">Sort in Descending Order By (best-match-desc, rating-desc, distance-asc)</label>
                         <input type="text" class="form-control" id="sort-input" placeholder="e.g best-match-desc">
                     </div>
-                </div>
+                </div> -->
+                <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <h3>Sort In Descending Order By</h3>
+                            <select class="custom-select" id="sort-input" required>
+                            <option value="best-match-desc">Best Match</option>
+                            <option value="rating-desc">Rating</option>
+                           <option value="distance-asc">Proximity</option>
+                            </select>
+                        </div>
+                    </div>
                 <button type="submit" class="btn btn-primary" id="btn-submit">Submit</button>
             </form>
             <div class="col-lg-12">
                 <div class=" panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><strong>Best Match Physician Around You</strong></h3>
+                        <h3 class="panel-title"><strong>Physicians Around You</strong></h3>
                     </div>
                     <div class="panel-body">
                         <table class="table table-hover" id="table-list">
