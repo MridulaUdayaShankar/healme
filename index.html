@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <title>Heal Me</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
         <link rel="stylesheet" type="text/css"  href="assets/css/style.css" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     </head>
@@ -12,9 +13,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <nav>
+                    <nav class="text-center">
                     <a class="navbar-brand" href="#">
-                    <img src="assets/images/2a32a7eb-1506-468b-a3bf-bb2798051cb4.png" width="100" height="100" class="d-inline-block align-top" alt="">
+                    <img src="assets/images/2a32a7eb-1506-468b-a3bf-bb2798051cb4.png" class="d-inline-block align-top" alt="">
                     </a>
                     </nav>
                 </div>
@@ -72,60 +73,59 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <main>
-                <form>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <h3 for="inputEmail4">Symptoms</h3>
-                        <input type="text" class="form-control" id="input-symptoms" placeholder="e.g Ankle strain">
-                    </div>
+    <main>
+        <br>
+        <div class="container">
+            <form>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="inputEmail4">Symptoms</label>
+                    <input type="text" class="form-control" id="input-symptoms" placeholder="e.g Ankle strain">
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <h3 for="numberOfDoc">Number Of Doctors to Display</h3>
-                        <input type="number" class="form-control" id="number-Of-Doc" placeholder="e.g. 5">
-                    </div>
+                <div class="form-group col">
+                    <label for="numberOfDoc">Number Of Doctors to Display</label>
+                    <input type="number" class="form-control" id="number-Of-Doc" placeholder="e.g. 5">
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <h3 for="range">Range Of Search (miles)</h3>
-                        <input type="number" class="form-control" id="search-input" placeholder="e.g 5">
-                    </div>
+                <div class="form-group col">
+                    <label for="range">Range Of Search (miles)</label>
+                    <input type="number" class="form-control" id="search-input" placeholder="e.g 5">
                 </div>
+            </div>
 <!--                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="gender">Gender of Physician (male or female)</label>
-                        <input type="text" class="form-control" id="gender-input" placeholder="e.g male">
-                    </div>
-                </div> -->
-                <div class="form-row">
-                    <div class= "form-group col-md-6">
-                            <h3>Gender of Physician</h3>
-                            <select class="custom-select" id="gender-input"required>
-                                <option value="female">Female</option>
-                                <option value="male">Male</option>
-                            </select>
-                        </div>
-                    </div>
-<!--                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="sort">Sort in Descending Order By (best-match-desc, rating-desc, distance-asc)</label>
-                        <input type="text" class="form-control" id="sort-input" placeholder="e.g best-match-desc">
-                    </div>
-                </div> -->
-                <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <h3>Sort In Descending Order By</h3>
-                            <select class="custom-select" id="sort-input" required>
-                            <option value="best-match-desc">Best Match</option>
-                            <option value="rating-desc">Rating</option>
-                           <option value="distance-asc">Proximity</option>
-                            </select>
-                        </div>
-                    </div>
-                <button type="submit" class="btn btn-primary" id="btn-submit">Submit</button>
-            </form>
+                <div class="form-group col-md-6">
+                    <label for="gender">Gender of Physician (male or female)</label>
+                    <input type="text" class="form-control" id="gender-input" placeholder="e.g male">
+                </div>
+            </div> -->
+            <div class="row">
+                <div class= "col-md-6">
+                    <label>Gender of Physician</label>
+                    <select class="custom-select" id="gender-input"required>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label>Sort In Descending Order By</label>
+                    <select class="custom-select" id="sort-input" required>
+                    <option value="best-match-desc">Best Match</option>
+                    <option value="rating-desc">Rating</option>
+                   <option value="distance-asc">Proximity</option>
+                    </select>
+                </div>
+            </div>
+<!--        <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="sort">Sort in Descending Order By (best-match-desc, rating-desc, distance-asc)</label>
+                    <input type="text" class="form-control" id="sort-input" placeholder="e.g best-match-desc">
+                </div>
+            </div> -->
+            <div class="col-12 text-center">
+                <br>
+                <button type="submit" class="btn btn-primary" id="btn-submit">Find Doctors near you</button>    
+            </div>
+            
+        </form>
             <div class="col-lg-12">
                 <div class=" panel-primary">
                     <div class="panel-heading">
@@ -148,11 +148,11 @@
                     </div>
                 </div>
             </div>
-            <div class="maps"></div>                   
-        </main>
+            <div class="maps"></div>
     </div>
+    </main>
     <footer>
-        <!-- <div class="container-fluid"> -->
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="footer">
@@ -160,7 +160,7 @@
                     </div>   
                 </div>
             </div>      
-        <!-- </div> -->
+        </div>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
