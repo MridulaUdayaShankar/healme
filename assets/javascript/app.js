@@ -1,4 +1,14 @@
-function getLocation(){
+// Button Listener
+$("#btn-submit").on("click", function() {
+  console.log("hello")
+  event.preventDefault();
+
+  getLocation();
+
+});
+
+
+var getLocation = function(){
 
   if (navigator.geolocation){
     console.log(navigator.geolocation.getCurrentPosition(betterDoctor));
@@ -10,36 +20,66 @@ function getLocation(){
 
 
 var betterDoctor = function(position){
-
+  
   var key = "bc7f67f5ab920635890a971a98eac05e";
 
   var lat = position.coords.latitude.toFixed(3);
 
   var lng = position.coords.longitude.toFixed(3);
 
-  var range = 100;
+  var range = $("#search-input").val().trim();
 
-  var num = 10;
+  var num = $("#number-Of-Doc").val().trim();
 
-  var injury = "ankle strain";
+  var injury = $("#input-symptoms").val().trim();
 
-  var queryURL = "https://api.betterdoctor.com/2016-03-01/doctors?query=" + injury + "location=" + lat + "," + lng + "," + range + "&skip=0&limit=" + num + "&user_key=" + key;
+  var gender = $("#gender-input").val().trim();
+
+  var sort = $("#sort-input").val().trim();
+
+  var queryURL = "https://api.betterdoctor.com/2016-03-01/doctors?query=" + injury + "&location=" + lat + "," + lng + "," + range + "&skip=0&gender=" + gender + "&sort=" + sort + "&limit=" + num + "&user_key=" + key;
 
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response){
-
     console.log(response);
 
+    for(var i=0; i< response.meta.count; i++){
+      $("#table-list > tbody").append("<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + response.data[i].specialties[0].description + "</td><td>" + response.data[i].practices[0].visit_address.street + " " + response.data[i].practices[0].visit_address.city + ", " + response.data[i].practices[0].visit_address.state +  " " + response.data[i].practices[0].visit_address.zip + "</td><td>" + response.data[i].practices[0].phones[0].number + "</td><td>" + response.data[i].practices[0].website + "</td></tr>");
+    }
+  
   });
+
+    //Clears all of the text-boxes
+  $("#input-symptoms").val("");
+  $("#number-Of-Doc").val("");
+  $("#search-input").val("");
+  $("#sort-input").val("");
+  $("#gender-input").val("");
 }
 
-getLocation();
 
 // var googleMaps = function(){
 
 //   var key = "AIzaSyCOBLdLofHakTbDCusqPvCHIFPp8kf8SvM"
+
+//   var queryURL =
+
+//    $.ajax({
+//     url: queryURL,
+//     method: "GET"
+//   }).then(function(response){
+
+//     console.log(response);
+
+//   });
+// }
+
+
+
+
+
 
 //   var queryURL =
 
