@@ -7,6 +7,14 @@ $("#btn-submit").on("click", function() {
 
 });
 
+$("#btn-clear").on("click", function() {
+  console.log("bye")
+  event.preventDefault();
+
+  window.location.reload();
+
+});
+
 
 var getLocation = function(){
 

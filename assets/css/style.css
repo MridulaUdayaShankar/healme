@@ -39,6 +39,14 @@ body {
      width: 45px !important;
      height: 45px !important;
  }   
+
+ #btn-clear{
+     float: right;
+ }
+
+  #btn-submit{
+     float: left;
+ }
  
  main {
      background: #8DCAFF;
