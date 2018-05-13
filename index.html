@@ -101,16 +101,27 @@
                 <div class= "col-md-6">
                     <label>Gender of Physician</label>
                     <select class="custom-select" id="gender-input"required>
+                        <option value="male"></option>
                         <option value="female">Female</option>
                         <option value="male">Male</option>
                     </select>
                 </div>
                 <div class="col-md-6">
-                    <label>Sort In Descending Order By</label>
+                    <label>Sort By</label>
                     <select class="custom-select" id="sort-input" required>
-                    <option value="best-match-desc">Best Match</option>
-                    <option value="rating-desc">Rating</option>
-                   <option value="distance-asc">Proximity</option>
+                    <option value="distance-desc"></option>
+                    <option value="full-name-asc">Full Name Ascending</option>
+                    <option value="full-name-desc">Full Name Descending</option>
+                    <option value="last-name-asc">Last Name Ascending</option>
+                    <option value="last-name-desc">Last Name Descending</option>
+                    <option value="first-name-asc">First Name Ascending</option>
+                    <option value="first-name-desc">First Name Descending</option>
+                    <option value="best-match-asc">Best Match Ascending</option>
+                    <option value="best-match-desc">Best Match Descending</option>
+                    <option value="rating-asc">Rating Ascending</option>
+                    <option value="rating-desc">Rating Descending</option>
+                    <option value="distance-asc">Distance Ascending</option>
+                    <option value="distance-desc">Distance Descending</option>
                     </select>
                 </div>
             </div>
@@ -138,7 +149,8 @@
                                 <th>Name</th>
                                 <th>Description of Specialty</th>
                                 <th>Location</th>
-                                <th>Phone Number</th>  
+                                <th>Phone Number</th>
+                                <th>Distance (miles)</th>    
                                 <th>Website</th>
                             </tr>
                             </thead>
