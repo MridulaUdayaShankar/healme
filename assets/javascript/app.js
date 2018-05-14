@@ -39,11 +39,15 @@ $("#btn-clear").on("click", function() {
 
 var getLocation = function(){
 
-  if (navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(betterDoctor);
-  }else{
-    alert("Geolocation is not supported by this browser.");
-  }
+  // if (navigator.geolocation){
+  //   navigator.geolocation.getCurrentPosition(betterDoctor);
+  // }else{
+  //   alert("Geolocation is not supported by this browser.");
+  // }
+
+  $.get("https://freegeoip.net/json/", function(res){
+      betterDoctor(res);
+  }, "jsonp");
 
 }
 
@@ -52,9 +56,9 @@ var betterDoctor = function(position){
   
   var key = "bc7f67f5ab920635890a971a98eac05e";
 
-  var lat = position.coords.latitude.toFixed(3);
+  var lat = position.latitude.toFixed(3);
 
-  var lng = position.coords.longitude.toFixed(3);
+  var lng = position.longitude.toFixed(3);
 
   var range = $("#search-input").val().trim();
 
