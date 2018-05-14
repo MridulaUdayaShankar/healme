@@ -51,7 +51,18 @@ body {
  .carousel-control-next-icon, .carousel-control-prev-icon {
      width: 45px !important;
      height: 45px !important;
- }   
+ } 
+
+.modal-header{
+    color: lightgray;
+    text-decoration-color: lightgray;
+}
+
+ #ajax_loader{
+    display: block; 
+    margin-left: 40%; 
+    margin-top: 2%;
+}  
 
  #btn-clear{
      float: right;
