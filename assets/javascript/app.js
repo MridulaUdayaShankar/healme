@@ -230,6 +230,8 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         btnLogin.addClass("d-none");
         btnSignUp.addClass("d-none");
         btnLogout.removeClass("d-none");
+        $(".box-email").hide();
+        $(".box-password").hide();
         $(".box-search").slideToggle();
         $("html, body").animate({ scrollTop: $('.box-search').offset().top }, 1000);
     } else {
@@ -237,6 +239,8 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         btnLogout.addClass("d-none");
         btnLogin.removeClass("d-none");
         btnSignUp.removeClass("d-none");
+        $(".box-email").show();
+        $(".box-password").show();
     }
 });
 
