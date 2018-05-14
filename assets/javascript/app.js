@@ -9,6 +9,7 @@ var config = {
 
 firebase.initializeApp(config);
 
+const database = firebase.database();
 const auth = firebase.auth();
 
 const txtEmail = $("#txtEmail");
@@ -73,9 +74,24 @@ var betterDoctor = function(position){
 
     // console.log(response);
 
+    var searchResults = "";
+
     for(var i=0; i< response.meta.count; i++){
       // betterDoctorPractice(response.data[i].practices[0].visit_address.street, lat, lng, range, num, key, sort, response.meta.count)
-      $("#table-list > tbody").append("<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + response.data[i].specialties[0].description + "</td><td>" + response.data[i].practices[0].visit_address.street + " " + response.data[i].practices[0].visit_address.city + ", " + response.data[i].practices[0].visit_address.state +  " " + response.data[i].practices[0].visit_address.zip + "</td><td>" + response.data[i].practices[0].phones[0].number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + response.data[i].practices[0].website + "</td></tr>");
+
+        searchResults += "<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + response.data[i].specialties[0].description + "</td><td>" + response.data[i].practices[0].visit_address.street + " " + response.data[i].practices[0].visit_address.city + ", " + response.data[i].practices[0].visit_address.state +  " " + response.data[i].practices[0].visit_address.zip + "</td><td>" + response.data[i].practices[0].phones[0].number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + response.data[i].practices[0].website + "</td></tr>";
+        $("#table-list > tbody").append("<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + response.data[i].specialties[0].description + "</td><td>" + response.data[i].practices[0].visit_address.street + " " + response.data[i].practices[0].visit_address.city + ", " + response.data[i].practices[0].visit_address.state +  " " + response.data[i].practices[0].visit_address.zip + "</td><td>" + response.data[i].practices[0].phones[0].number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + response.data[i].practices[0].website + "</td></tr>");
+
+        firebase.auth().onAuthStateChanged(firebaseUser => {
+
+            if(firebaseUser) {
+
+                database.ref(firebaseUser.uid).update({
+                    searchResults: searchResults
+                });
+            }
+
+        });
     }
   
   });
@@ -143,6 +159,17 @@ btnSignUp.on("click", function(event) {
         // ...
     });
 
+    firebase.auth().onAuthStateChanged(firebaseUser => {
+
+        if(firebaseUser) {
+
+            database.ref(firebaseUser.uid).set({
+                email: firebaseUser.email
+            });
+        }
+
+    });
+
 });
 
 btnLogin.on("click", function(event) {
@@ -161,6 +188,21 @@ btnLogin.on("click", function(event) {
         console.log(errorMessage);
         // ...
     });
+
+    firebase.auth().onAuthStateChanged(firebaseUser => {
+
+        if(firebaseUser) {
+
+            database.ref(firebaseUser.uid).on("value", function(snapshot) {
+
+                console.log("Welcome, " +snapshot.val().email);
+
+            });
+        }
+
+    });
+
+
 
 });
 
@@ -181,17 +223,17 @@ btnLogout.on("click", function() {
 
 firebase.auth().onAuthStateChanged(firebaseUser => {
     if(firebaseUser) {
-        console.log(firebaseUser);
-        btnLogin.attr("disabled", "disabled");
-        btnSignUp.attr("disabled", "disabled");
+        // console.log(firebaseUser);
+        btnLogin.addClass("d-none");
+        btnSignUp.addClass("d-none");
         btnLogout.removeClass("d-none");
         $(".box-search").slideToggle();
         $("html, body").animate({ scrollTop: $('.box-search').offset().top }, 1000);
     } else {
         console.log("not logged in");
         btnLogout.addClass("d-none");
-        btnLogin.removeAttr("disabled");
-        btnSignUp.removeAttr("disabled");
+        btnLogin.removeClass("d-none");
+        btnSignUp.removeClass("d-none");
     }
 });
 
