@@ -17,7 +17,10 @@ body {
 
  .navbar-brand{
      margin-left: 20px;
- 
+ }
+
+ .img-logo {
+    max-width: 150px;
  }
   
  .slide-show{
@@ -50,7 +53,15 @@ body {
  
  main {
      background: #8DCAFF;
-     padding-bottom: 1rem;
+     /*padding-bottom: 1rem;*/
+ }
+
+ .stripe {
+     background: url("../images/pattern.jpg") repeat center;
+     padding-top:45px;
+     padding-bottom:45px;
+     color: #fff;
+     font-weight: bold;
  }
 
  .table {
@@ -62,4 +73,18 @@ body {
      color: #fff;
      text-align: center;
      padding: 15px 0px;
+ }
+
+ .box-search {
+     margin-top: 25px;
+     display: none;
+ }
+ 
+ .box-login {
+     background: #083B66;
+     padding: 20px 0px 0px;
+ }
+ 
+ .box-login label {
+     color: #fff;
  }
