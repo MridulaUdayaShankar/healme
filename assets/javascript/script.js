@@ -25,9 +25,14 @@ btnSignUp.on("click", function(event) {
     const pass = txtPassword.val();
     const auth = firebase.auth();
 
-    const promise = auth.createUserWithEmailAndPassword(email, pass);
+    const promise = auth.createUserWithEmailAndPassword(email, pass).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
 
-    promise.catch(e => console.log(e.message));
+        console.log(errorMessage);
+        // ...
+    });
 
 });
 
@@ -47,10 +52,6 @@ btnLogin.on("click", function(event) {
         console.log(errorMessage);
         // ...
     });
-
-    // $(".box-search").slideToggle();
-
-    // promise.catch(e => console.log(e.code));
 
 });
 
