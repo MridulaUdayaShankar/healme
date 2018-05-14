@@ -18,15 +18,14 @@ const btnLogin = $("#btnLogin");
 const btnSignUp = $("#btnSignup");
 const btnLogout = $("#btnLogout");
 
-$('#pleaseWaitDialog').modal();
-
 // Button Listener
 $("#btn-submit").on("click", function() {
   // console.log("hello")
-  event.preventDefault();
+    event.preventDefault();
 
-  getLocation();
+    getLocation();
 
+    $('#pleaseWaitDialog').modal();
 });
 
 $("#btn-clear").on("click", function() {
