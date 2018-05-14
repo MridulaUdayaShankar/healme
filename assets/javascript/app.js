@@ -18,12 +18,24 @@ const btnLogin = $("#btnLogin");
 const btnSignUp = $("#btnSignup");
 const btnLogout = $("#btnLogout");
 
+var audio = new Audio('assets/images/aiseeutepego.mp3');
+
+// var playAudio = () { 
+//     au.play(); 
+// } 
+
+// function pauseAudio() { 
+//     x.pause(); 
+// }
+
 // Button Listener
 $("#btn-submit").on("click", function() {
   // console.log("hello")
     event.preventDefault();
 
     getLocation();
+
+    audio.play();
 
     $('#pleaseWaitDialog').modal();
 });
@@ -79,6 +91,8 @@ var betterDoctor = function(position){
 
     console.log(response);
 
+    audio.pause();
+
     $('#pleaseWaitDialog').modal('hide');
     
     var searchResults = "";
@@ -86,7 +100,7 @@ var betterDoctor = function(position){
     for(var i=0; i< response.meta.count; i++){
       // betterDoctorPractice(response.data[i].practices[0].visit_address.street, lat, lng, range, num, key, sort, response.meta.count)
 
-        searchResults += "<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + response.data[i].practices[0].description + "</td><td>" + response.data[i].practices[0].visit_address.street + " " + response.data[i].practices[0].visit_address.city + ", " + response.data[i].practices[0].visit_address.state +  " " + response.data[i].practices[0].visit_address.zip + "</td><td>" + "<a href='tel:"  + response.data[i].practices[0].phones[0].number + "'>" + response.data[i].practices[0].phones[0].number + "</a>" + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + "<a href='"  + response.data[i].practices[0].website + "'>" + response.data[i].practices[0].website + "</a>" + "</td></tr>";
+        searchResults += "<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + response.data[i].specialties[0].description + "</td><td>" + response.data[i].practices[0].visit_address.street + " " + response.data[i].practices[0].visit_address.city + ", " + response.data[i].practices[0].visit_address.state +  " " + response.data[i].practices[0].visit_address.zip + "</td><td>" + "<a href='tel:"  + response.data[i].practices[0].phones[0].number + "'>" + response.data[i].practices[0].phones[0].number + "</a>" + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + "<a href='"  + response.data[i].practices[0].website + "'>" + response.data[i].practices[0].website + "</a>" + "</td></tr>";
 
         $("#table-list > tbody").append("<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + response.data[i].specialties[0].description + "</td><td>" + response.data[i].practices[0].visit_address.street + " " + response.data[i].practices[0].visit_address.city + ", " + response.data[i].practices[0].visit_address.state +  " " + response.data[i].practices[0].visit_address.zip + "</td><td>" + "<a href='tel:"  + response.data[i].practices[0].phones[0].number + "'>" + response.data[i].practices[0].phones[0].number + "</a>" + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + "<a href='"  + response.data[i].practices[0].website + "'>" + response.data[i].practices[0].website + "</a>" + "</td></tr>");
 
