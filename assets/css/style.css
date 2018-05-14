@@ -13,6 +13,10 @@ body {
  header nav {
      background-color: #f6f6f6;
      margin:0px 0px 0px 0px;
+     z-index: 20;
+     position: relative;
+     opacity: .8;
+
  }
 
  .navbar-brand{
@@ -21,6 +25,12 @@ body {
 
  .img-logo {
     max-width: 150px;
+ }
+ .slide{
+     margin-top: -150px;
+     z-index: 10;
+     position: relative;
+
  }
   
  .slide-show{
@@ -56,12 +66,15 @@ body {
      /*padding-bottom: 1rem;*/
  }
 
- .stripe {
+ .carousel-caption {
      background: url("../images/pattern.jpg") repeat center;
      padding-top:45px;
      padding-bottom:45px;
      color: #fff;
      font-weight: bold;
+     opacity: 0.9;
+     bottom: 0px;
+
  }
 
  .table {
