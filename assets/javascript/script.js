@@ -39,9 +39,18 @@ btnLogin.on("click", function(event) {
     const pass = txtPassword.val();
     const auth = firebase.auth();
 
-    const promise = auth.signInWithEmailAndPassword(email, pass);
+    const promise = auth.signInWithEmailAndPassword(email, pass).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
 
-    promise.catch(e => console.log(e.message));
+        console.log(errorMessage);
+        // ...
+    });
+
+    // $(".box-search").slideToggle();
+
+    // promise.catch(e => console.log(e.code));
 
 });
 
@@ -53,16 +62,26 @@ btnLogout.on("click", function() {
     const pass = txtPassword.val();
 
     firebase.auth().signOut();
+
+    $(".box-search").slideToggle();
+
+
     
 });
 
 firebase.auth().onAuthStateChanged(firebaseUser => {
     if(firebaseUser) {
         console.log(firebaseUser);
-        btnLogout.removeClass("hide");
+        btnLogin.attr("disabled", "disabled");
+        btnSignUp.attr("disabled", "disabled");
+        btnLogout.removeClass("d-none");
+        $(".box-search").slideToggle();
+        $("html, body").animate({ scrollTop: $('.box-search').offset().top }, 1000);
     } else {
         console.log("not logged in");
-        btnLogout.addClass("hide");
+        btnLogout.addClass("d-none");
+        btnLogin.removeAttr("disabled");
+        btnSignUp.removeAttr("disabled");
     }
 });
 
