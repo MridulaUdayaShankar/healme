@@ -204,12 +204,12 @@ btnLogin.on("click", function(event) {
             database.ref(firebaseUser.uid).on("value", function(snapshot) {
 
                 console.log("Welcome, " +snapshot.val().email);
-                btnLogin.addClass("d-none");
-                btnSignUp.addClass("d-none");
-                btnLogout.removeClass("d-none");
-                $(".box-email").hide();
-                $(".box-password").hide();
-                $(".box-search").slideToggle();
+                // btnLogin.addClass("d-none");
+                // btnSignUp.addClass("d-none");
+                // btnLogout.removeClass("d-none");
+                // $(".box-email").hide();
+                // $(".box-password").hide();
+                // $(".box-search").slideToggle();
 
             });
         }
@@ -230,13 +230,33 @@ btnLogout.on("click", function() {
     firebase.auth().signOut();
 
     $(".box-search").slideToggle();
-    console.log("not logged in");
-    btnLogout.addClass("d-none");
-    btnLogin.removeClass("d-none");
-    btnSignUp.removeClass("d-none");
-    $(".box-email").show();
-    $(".box-password").show();
+    // console.log("not logged in");
+    // btnLogout.addClass("d-none");
+    // btnLogin.removeClass("d-none");
+    // btnSignUp.removeClass("d-none");
+    // $(".box-email").show();
+    // $(".box-password").show();
     
+});
+
+firebase.auth().onAuthStateChanged(firebaseUser => {
+    if(firebaseUser) {	+
+        // console.log(firebaseUser);
+            btnLogin.addClass("d-none");
+        btnSignUp.addClass("d-none");
+        btnLogout.removeClass("d-none");
+        $(".box-email").hide();
+        $(".box-password").hide();
+        $(".box-search").slideToggle();
+        $("html, body").animate({ scrollTop: $('.box-search').offset().top }, 1000);
+    } else {
+        console.log("not logged in");
+        btnLogout.addClass("d-none");
+        btnLogin.removeClass("d-none");
+        btnSignUp.removeClass("d-none");
+        $(".box-email").show();
+        $(".box-password").show();
+    }
 });
 
 
