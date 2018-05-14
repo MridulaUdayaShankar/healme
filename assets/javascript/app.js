@@ -18,6 +18,8 @@ const btnLogin = $("#btnLogin");
 const btnSignUp = $("#btnSignup");
 const btnLogout = $("#btnLogout");
 
+$('#pleaseWaitDialog').modal();
+
 // Button Listener
 $("#btn-submit").on("click", function() {
   // console.log("hello")
@@ -74,6 +76,8 @@ var betterDoctor = function(position){
 
     // console.log(response);
 
+    $('#pleaseWaitDialog').modal('hide');
+    
     var searchResults = "";
 
     for(var i=0; i< response.meta.count; i++){
