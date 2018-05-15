@@ -226,9 +226,6 @@ btnLogin.on("click", function(event) {
                 $("#txtEmail").val("");
                 $("#txtPassword").val("");
         }
-
-        console.log(errorCode);
-        // ...
     });
 });
 
@@ -299,7 +296,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         $.prompt("Welcome back, " +firebaseUser.email+"!");
 
     } else {
-        console.log("not logged in");
         btnLogout.addClass("d-none");
         btnLogin.removeClass("d-none");
         btnSignUp.removeClass("d-none");
