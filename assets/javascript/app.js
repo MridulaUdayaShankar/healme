@@ -18,15 +18,8 @@ const btnLogin = $("#btnLogin");
 const btnSignUp = $("#btnSignup");
 const btnLogout = $("#btnLogout");
 
-var audio = new Audio('assets/images/aiseeutepego.mp3');
+var audio = new Audio('assets/images/bossanova.mp3');
 
-// var playAudio = () { 
-//     au.play(); 
-// } 
-
-// function pauseAudio() { 
-//     x.pause(); 
-// }
 
 // Button Listener
 $("#btn-submit").on("click", function() {
