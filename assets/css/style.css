@@ -34,6 +34,7 @@ body {
  }
 
  form{
+     margin-top: 10px;
      margin-bottom: 30px;
  }
 
@@ -104,4 +105,8 @@ body {
  
  .box-login label {
      color: #fff;
+ }
+
+ .table-result {
+     padding-bottom: 15px;
  }
