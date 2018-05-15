@@ -65,17 +65,17 @@ var betterDoctor = function(position){
 
   var lng = position.longitude.toFixed(3);
 
-  var range = $("#search-input").val().trim();
+  var range = $("#search-input").val();
 
-  var num = $("#number-Of-Doc").val().trim();
+  var num = $("#number-Of-Doc").val();
 
   var injury = $("#input-symptoms").val().trim();
 
-  var gender = $("#gender-input").val().trim();
+  var gender = $("#gender-input").val();
 
-  var sort = $("#sort-input").val().trim();
+  var sort = $("#sort-input").val();
 
-  var queryURL = "https://api.betterdoctor.com/2016-03-01/doctors?query=" + injury + "&location=" + lat + "," + lng + "," + range + "&user_location=" + lat + "," + lng +  "&skip=0&gender=" + gender + "&sort=" + sort + "&limit=" + num + "&user_key=" + key;
+  var queryURL = "https://api.betterdoctor.com/2016-03-01/doctors?query=" + injury + "&location=" + lat + "," + lng + "," + range + "&user_location=" + lat + "," + lng +  "&skip=0&gender=" + gender + "&sort=" + sort + "&user_key=" + key;
 
 
     $.ajax({
@@ -92,7 +92,7 @@ var betterDoctor = function(position){
         var searchResults = "";
 
 
-        for (var i = 0; i < response.meta.count; i++) {
+        for (var i = 0; i < num-1; i++) {
 
             // Validating the website value, to prevent showing undefined
             var website = null;
