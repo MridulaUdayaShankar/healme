@@ -189,22 +189,13 @@ btnLogin.on("click", function(event) {
         // ...
     });
 
+
+
     firebase.auth().onAuthStateChanged(firebaseUser => {
 
         if(firebaseUser) {
 
-            database.ref(firebaseUser.uid).on("value", function(snapshot) {
 
-                // console.log("Welcome, " +snapshot.val().email);
-                $.prompt("Welcome back, " +firebaseUser.email+"!");
-                // btnLogin.addClass("d-none");
-                // btnSignUp.addClass("d-none");
-                // btnLogout.removeClass("d-none");
-                // $(".box-email").hide();
-                // $(".box-password").hide();
-                // $(".box-search").slideToggle();
-
-            });
         }
 
     });
@@ -241,6 +232,11 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         $(".box-email").hide();
         $(".box-password").hide();
         $(".box-search").slideToggle();
+        var welcome = $("<h3>");
+        welcome.text("Greetings, " +firebaseUser.email+"!");
+        welcome.addClass("welcome");
+        $(welcome).insertBefore("#btnLogout");
+        $.prompt("Welcome back, " +firebaseUser.email+"!");
     } else {
         console.log("not logged in");
         btnLogout.addClass("d-none");
@@ -248,6 +244,8 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         btnSignUp.removeClass("d-none");
         $(".box-email").show();
         $(".box-password").show();
+        $(".welcome").remove();
+        $.prompt("See you soon!");
     }
 });
 
