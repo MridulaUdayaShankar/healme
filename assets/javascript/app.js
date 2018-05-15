@@ -91,16 +91,29 @@ var betterDoctor = function(position){
     var searchResults = "";
 
     for(var i=0; i< response.meta.count; i++){
-      // betterDoctorPractice(response.data[i].practices[0].visit_address.street, lat, lng, range, num, key, sort, response.meta.count)
+
+        // Validating the website value, to prevent showing undefined
         var website = null;
         if(typeof response.data[i].practices[0].website === "undefined" || response.data[i].practices[0].website === null) {
             website = "-----";
         } else {
             website = "<a href='"+response.data[i].practices[0].website+"' target='_blank'>Access here</a>";
         }
-        searchResults += "<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + response.data[i].specialties[0].description + "</td><td>" + response.data[i].practices[0].visit_address.street + " " + response.data[i].practices[0].visit_address.city + ", " + response.data[i].practices[0].visit_address.state +  " " + response.data[i].practices[0].visit_address.zip + "</td><td>" + "<a href='tel:"  + response.data[i].practices[0].phones[0].number + "'>" + response.data[i].practices[0].phones[0].number + "</a>" + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + website + "</td></tr>";
 
-        $("#table-list > tbody").append("<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + response.data[i].specialties[0].description + "</td><td>" + response.data[i].practices[0].visit_address.street + " " + response.data[i].practices[0].visit_address.city + ", " + response.data[i].practices[0].visit_address.state +  " " + response.data[i].practices[0].visit_address.zip + "</td><td>" + "<a href='tel:"  + response.data[i].practices[0].phones[0].number + "'>" + response.data[i].practices[0].phones[0].number + "</a>" + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + website + "</td></tr>");
+        //Validating the phone number, putting a mask on it, to show it better (999)-999-9999 and also making in to show only landline numbers, not faxes
+        var number = "No number";
+        var numberFormatted = parseInt(response.data[i].practices[0].phones[0].number);
+
+        if(response.data[i].practices[0].phones[0].type == "landline") {
+            number = formatPhoneNumber(numberFormatted);
+            number = "<a href='tel:"+numberFormatted+"'>"+number+"</a>";
+        }
+        //https://www.google.com/maps/dir/?api=1&origin=47.5951518,-122.3316393&destination=37.65317,-120.9744
+        var location = "<a target='_blank' href='https://www.google.com/maps/dir/?api=1&origin="+lat+","+lng+"&destination="+response.data[i].practices[0].lat+","+response.data[i].practices[0].lon+"'>"+ response.data[i].practices[0].visit_address.street + " " + response.data[i].practices[0].visit_address.city + ", " + response.data[i].practices[0].visit_address.state +  " " + response.data[i].practices[0].visit_address.zip +"</a>";
+
+        searchResults += "<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + response.data[i].specialties[0].description + "</td><td>"+location+"</td><td>" + number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + website + "</td></tr>";
+
+        $("#table-list > tbody").append("<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + response.data[i].specialties[0].description + "</td><td>" + location + "</td><td>" + number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + website + "</td></tr>");
 
         firebase.auth().onAuthStateChanged(firebaseUser => {
 
@@ -270,6 +283,12 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         $(".box-password").show();
     }
 });
+
+function formatPhoneNumber(s) {
+    var s2 = (""+s).replace(/\D/g, '');
+    var m = s2.match(/^(\d{3})(\d{3})(\d{4})$/);
+    return (!m) ? null : "(" + m[1] + ") " + m[2] + "-" + m[3];
+}
 
 
 
