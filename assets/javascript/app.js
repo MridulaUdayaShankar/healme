@@ -78,71 +78,72 @@ var betterDoctor = function(position){
   var queryURL = "https://api.betterdoctor.com/2016-03-01/doctors?query=" + injury + "&location=" + lat + "," + lng + "," + range + "&user_location=" + lat + "," + lng +  "&skip=0&gender=" + gender + "&sort=" + sort + "&limit=" + num + "&user_key=" + key;
 
 
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).then(function(response){
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
 
-    console.log(response);
+        console.log(response);
 
-    audio.pause();
+        audio.pause();
 
-    $('#pleaseWaitDialog').modal('hide');
-    
-    var searchResults = "";
+        $('#pleaseWaitDialog').modal('hide');
 
-    for(var i=0; i< response.meta.count; i++){
+        var searchResults = "";
 
-        // Validating the website value, to prevent showing undefined
-        var website = null;
-        if(typeof response.data[i].practices[0].website === "undefined" || response.data[i].practices[0].website === null) {
-            website = "-----";
-        } else {
-            website = "<a href='"+response.data[i].practices[0].website+"' target='_blank'>Access here</a>";
-        }
 
-        //Validating the phone number, putting a mask on it, to show it better (999)-999-9999 and also making in to show only landline numbers, not faxes
-        var number = "No number";
-        var numberFormatted = parseInt(response.data[i].practices[0].phones[0].number);
+        for (var i = 0; i < response.meta.count; i++) {
 
-        if(response.data[i].practices[0].phones[0].type == "landline") {
-            number = formatPhoneNumber(numberFormatted);
-            number = "<a href='tel:"+numberFormatted+"'>"+number+"</a>";
-        }
-
-        //Validate Specialty Description Text
-        var specialties = null;
-        if(typeof response.data[i].specialties[0].description === "undefined" || response.data[i].specialties[0].description === null) {
-            specialties = "-----";
-        } else {
-            specialties = response.data[i].specialties[0].description;
-        }
-
-        // Formatting the address so the link can point straight to Google Maps, showing the directions to the doctor's place
-        //TODO: Change the location API to Geolocation after presentation
-        var location = "<a target='_blank' href='https://www.google.com/maps/dir/?api=1&origin="+lat+","+lng+"&destination="+response.data[i].practices[0].lat+","+response.data[i].practices[0].lon+"'>"+ response.data[i].practices[0].visit_address.street + " " + response.data[i].practices[0].visit_address.city + ", " + response.data[i].practices[0].visit_address.state +  " " + response.data[i].practices[0].visit_address.zip +"</a>";
-
-        searchResults += "<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + specialties + "</td><td>"+location+"</td><td>" + number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + website + "</td></tr>";
-
-        $("#table-list > tbody").append("<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + specialties + "</td><td>" + location + "</td><td>" + number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + website + "</td></tr>");
-
-        firebase.auth().onAuthStateChanged(firebaseUser => {
-
-            if(firebaseUser) {
-
-                database.ref(firebaseUser.uid).update({
-                    injury: injury,
-                    num: num,
-                    gender: gender,
-                    range:range,
-                    searchResults: searchResults
-                });
+            // Validating the website value, to prevent showing undefined
+            var website = null;
+            if (typeof response.data[i].practices[0].website === "undefined" || response.data[i].practices[0].website === null) {
+                website = "-----";
+            } else {
+                website = "<a href='" + response.data[i].practices[0].website + "' target='_blank'>Access here</a>";
             }
 
-        });
-    }
-  
-  });
+            //Validating the phone number, putting a mask on it, to show it better (999)-999-9999 and also making in to show only landline numbers, not faxes
+            var number = "No number";
+            var numberFormatted = parseInt(response.data[i].practices[0].phones[0].number);
+
+            if (response.data[i].practices[0].phones[0].type == "landline") {
+                number = formatPhoneNumber(numberFormatted);
+                number = "<a href='tel:" + numberFormatted + "'>" + number + "</a>";
+            }
+
+            //Validate Specialty Description Text
+            var specialties = null;
+            if (typeof response.data[i].specialties[0].description === "undefined" || response.data[i].specialties[0].description === null) {
+                specialties = "-----";
+            } else {
+                specialties = response.data[i].specialties[0].description;
+            }
+
+            // Formatting the address so the link can point straight to Google Maps, showing the directions to the doctor's place
+            //TODO: Change the location API to Geolocation after presentation
+            var location = "<a target='_blank' href='https://www.google.com/maps/dir/?api=1&origin=" + lat + "," + lng + "&destination=" + response.data[i].practices[0].lat + "," + response.data[i].practices[0].lon + "'>" + response.data[i].practices[0].visit_address.street + " " + response.data[i].practices[0].visit_address.city + ", " + response.data[i].practices[0].visit_address.state + " " + response.data[i].practices[0].visit_address.zip + "</a>";
+
+            searchResults += "<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + specialties + "</td><td>" + location + "</td><td>" + number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + website + "</td></tr>";
+
+            $("#table-list > tbody").append("<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + specialties + "</td><td>" + location + "</td><td>" + number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + website + "</td></tr>");
+
+            firebase.auth().onAuthStateChanged(firebaseUser => {
+
+                if (firebaseUser) {
+
+                    database.ref(firebaseUser.uid).update({
+                        injury: injury,
+                        num: num,
+                        gender: gender,
+                        range: range,
+                        searchResults: searchResults
+                    });
+                }
+
+            });
+        }
+
+    });
 
     //Clears all of the text-boxes
   $("#input-symptoms").val("");
@@ -166,8 +167,21 @@ btnSignUp.on("click", function(event) {
         var errorCode = error.code;
         var errorMessage = error.message;
 
-        console.log(errorMessage);
-        // ...
+        switch(errorCode) {
+
+            case "auth/email-already-in-use":
+
+                $.prompt("Sorry! There is already an user with this e-mail!");
+                $("#txtEmail").val("");
+                $("#txtPassword").val("");
+
+            case "auth/invalid-email":
+
+                $.prompt("Please use a valid e-mail");
+                $("#txtEmail").val("");
+                $("#txtPassword").val("");
+        }
+
     });
 
     firebase.auth().onAuthStateChanged(firebaseUser => {
@@ -198,23 +212,24 @@ btnLogin.on("click", function(event) {
         var errorCode = error.code;
         var errorMessage = error.message;
 
-        console.log(errorMessage);
-        // ...
-    });
+        switch(errorCode) {
 
+            case "auth/wrong-password":
 
+                $.prompt("Wrong password. Please try again.");
+                $("#txtEmail").val("");
+                $("#txtPassword").val("");
 
-    firebase.auth().onAuthStateChanged(firebaseUser => {
+            case "auth/user-not-found":
 
-        if(firebaseUser) {
-
-
+                $.prompt("No users with this email were found.");
+                $("#txtEmail").val("");
+                $("#txtPassword").val("");
         }
 
+        console.log(errorCode);
+        // ...
     });
-
-
-
 });
 
 btnLogout.on("click", function() {
@@ -230,6 +245,7 @@ btnLogout.on("click", function() {
     
 });
 
+// Whenever a Firebase Authentication is changed (either with logging in or signing up, the if statement happens
 firebase.auth().onAuthStateChanged(firebaseUser => {
     if(firebaseUser) {
         btnLogin.addClass("d-none");
@@ -244,8 +260,8 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         $(welcome).insertBefore("#btnLogout");
 
         var lastSearch = "";
-        // console.log(firebaseUser);
 
+        // Getting data from Firebase database
         database.ref(firebaseUser.uid).on("value", function(snapshot) {
 
             if (typeof snapshot.val().searchResults !== "undefined") {
@@ -274,11 +290,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 });
 
             }
-            // Print the initial data to the console.
-            console.log(snapshot.val());
-
-            // Change the HTML
-            // $("#displayed-data").text(snapshot.val().name + " | " + snapshot.val().age + " | " + snapshot.val().phone);
 
             // If any errors are experienced, log them to console.
         }, function(errorObject) {
