@@ -109,13 +109,21 @@ var betterDoctor = function(position){
             number = "<a href='tel:"+numberFormatted+"'>"+number+"</a>";
         }
 
+        //Validate Specialty Description Text
+        var specialties = null;
+        if(typeof response.data[i].specialties[0].description === "undefined" || response.data[i].specialties[0].description === null) {
+            specialties = "-----";
+        } else {
+            specialties = response.data[i].specialties[0].description;
+        }
+
         // Formatting the address so the link can point straight to Google Maps, showing the directions to the doctor's place
         //TODO: Change the location API to Geolocation after presentation
         var location = "<a target='_blank' href='https://www.google.com/maps/dir/?api=1&origin="+lat+","+lng+"&destination="+response.data[i].practices[0].lat+","+response.data[i].practices[0].lon+"'>"+ response.data[i].practices[0].visit_address.street + " " + response.data[i].practices[0].visit_address.city + ", " + response.data[i].practices[0].visit_address.state +  " " + response.data[i].practices[0].visit_address.zip +"</a>";
 
-        searchResults += "<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + response.data[i].specialties[0].description + "</td><td>"+location+"</td><td>" + number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + website + "</td></tr>";
+        searchResults += "<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + specialties + "</td><td>"+location+"</td><td>" + number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + website + "</td></tr>";
 
-        $("#table-list > tbody").append("<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + response.data[i].specialties[0].description + "</td><td>" + location + "</td><td>" + number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + website + "</td></tr>");
+        $("#table-list > tbody").append("<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + specialties + "</td><td>" + location + "</td><td>" + number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + website + "</td></tr>");
 
         firebase.auth().onAuthStateChanged(firebaseUser => {
 
