@@ -89,9 +89,9 @@
                                 <input type="password" class="form-control" id="txtPassword" placeholder="Password">
                             </div>
                             <div class="form-group text-center">
-                                <button id="btnLogin" class="btn btn-primary">Log in</button>
-                                <button id="btnSignup" class="btn btn-success">Sign Up</button>
-                                <button id="btnLogout" class="btn btn-primary d-none">Log out</button>
+                                <button type="button" id="btnLogin" class="btn btn-primary">Log in</button>
+                                <button type="button" id="btnSignup" class="btn btn-success">Sign Up</button>
+                                <button type="button" id="btnLogout" class="btn btn-primary d-none">Log out</button>
                             </div>
 
                         </form>
@@ -176,30 +176,32 @@
                 </div>
                 <br>
             </form>
-            <div class="col-lg-12 table-result">
-                <div class=" panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><strong>Physicians Around You</strong></h3>
-                    </div>
-                    <div class="panel-body">
-                        <table class="table table-hover" id="table-list">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Description of Specialty</th>
-                                <th>Location</th>
-                                <th>Phone Number</th>
-                                <th>Distance (miles)</th>    
-                                <th>Website</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+            <div class="row">
+                <div class="col-lg-12 table-result">
+                    <div class=" panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><strong>Physicians Around You</strong></h3>
+                        </div>
+                        <div class="panel-body table-responsive">
+                            <table class="table table-hover" id="table-list">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description of Specialty</th>
+                                    <th>Location</th>
+                                    <th>Phone Number</th>
+                                    <th>Distance (miles)</th>
+                                    <th>Website</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="maps"></div>
+
         </div>
     </main>
     <footer>

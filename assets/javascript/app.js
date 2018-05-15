@@ -77,67 +77,73 @@ var betterDoctor = function(position){
 
   var queryURL = "https://api.betterdoctor.com/2016-03-01/doctors?query=" + injury + "&location=" + lat + "," + lng + "," + range + "&user_location=" + lat + "," + lng +  "&skip=0&gender=" + gender + "&sort=" + sort + "&limit=" + num + "&user_key=" + key;
 
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).then(function(response){
 
-    console.log(response);
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
 
-    audio.pause();
+        console.log(response);
 
-    $('#pleaseWaitDialog').modal('hide');
-    
-    var searchResults = "";
+        audio.pause();
 
-    for(var i=0; i< response.meta.count; i++){
+        $('#pleaseWaitDialog').modal('hide');
 
-        // Validating the website value, to prevent showing undefined
-        var website = null;
-        if(typeof response.data[i].practices[0].website === "undefined" || response.data[i].practices[0].website === null) {
-            website = "-----";
-        } else {
-            website = "<a href='"+response.data[i].practices[0].website+"' target='_blank'>Access here</a>";
-        }
+        var searchResults = "";
 
-        //Validating the phone number, putting a mask on it, to show it better (999)-999-9999 and also making in to show only landline numbers, not faxes
-        var number = "No number";
-        var numberFormatted = parseInt(response.data[i].practices[0].phones[0].number);
 
-        if(response.data[i].practices[0].phones[0].type == "landline") {
-            number = formatPhoneNumber(numberFormatted);
-            number = "<a href='tel:"+numberFormatted+"'>"+number+"</a>";
-        }
+        for (var i = 0; i < response.meta.count; i++) {
 
-        //Validate Specialty Description Text
-        var specialties = null;
-        if(typeof response.data[i].specialties[0].description === "undefined" || response.data[i].specialties[0].description === null) {
-            specialties = "-----";
-        } else {
-            specialties = response.data[i].specialties[0].description;
-        }
-
-        // Formatting the address so the link can point straight to Google Maps, showing the directions to the doctor's place
-        //TODO: Change the location API to Geolocation after presentation
-        var location = "<a target='_blank' href='https://www.google.com/maps/dir/?api=1&origin="+lat+","+lng+"&destination="+response.data[i].practices[0].lat+","+response.data[i].practices[0].lon+"'>"+ response.data[i].practices[0].visit_address.street + " " + response.data[i].practices[0].visit_address.city + ", " + response.data[i].practices[0].visit_address.state +  " " + response.data[i].practices[0].visit_address.zip +"</a>";
-
-        searchResults += "<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + specialties + "</td><td>"+location+"</td><td>" + number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + website + "</td></tr>";
-
-        $("#table-list > tbody").append("<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + specialties + "</td><td>" + location + "</td><td>" + number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + website + "</td></tr>");
-
-        firebase.auth().onAuthStateChanged(firebaseUser => {
-
-            if(firebaseUser) {
-
-                database.ref(firebaseUser.uid).update({
-                    searchResults: searchResults
-                });
+            // Validating the website value, to prevent showing undefined
+            var website = null;
+            if (typeof response.data[i].practices[0].website === "undefined" || response.data[i].practices[0].website === null) {
+                website = "-----";
+            } else {
+                website = "<a href='" + response.data[i].practices[0].website + "' target='_blank'>Access here</a>";
             }
 
-        });
-    }
-  
-  });
+            //Validating the phone number, putting a mask on it, to show it better (999)-999-9999 and also making in to show only landline numbers, not faxes
+            var number = "No number";
+            var numberFormatted = parseInt(response.data[i].practices[0].phones[0].number);
+
+            if (response.data[i].practices[0].phones[0].type == "landline") {
+                number = formatPhoneNumber(numberFormatted);
+                number = "<a href='tel:" + numberFormatted + "'>" + number + "</a>";
+            }
+
+            //Validate Specialty Description Text
+            var specialties = null;
+            if (typeof response.data[i].specialties[0].description === "undefined" || response.data[i].specialties[0].description === null) {
+                specialties = "-----";
+            } else {
+                specialties = response.data[i].specialties[0].description;
+            }
+
+            // Formatting the address so the link can point straight to Google Maps, showing the directions to the doctor's place
+            //TODO: Change the location API to Geolocation after presentation
+            var location = "<a target='_blank' href='https://www.google.com/maps/dir/?api=1&origin=" + lat + "," + lng + "&destination=" + response.data[i].practices[0].lat + "," + response.data[i].practices[0].lon + "'>" + response.data[i].practices[0].visit_address.street + " " + response.data[i].practices[0].visit_address.city + ", " + response.data[i].practices[0].visit_address.state + " " + response.data[i].practices[0].visit_address.zip + "</a>";
+
+            searchResults += "<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + specialties + "</td><td>" + location + "</td><td>" + number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + website + "</td></tr>";
+
+            $("#table-list > tbody").append("<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + specialties + "</td><td>" + location + "</td><td>" + number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + website + "</td></tr>");
+
+            firebase.auth().onAuthStateChanged(firebaseUser => {
+
+                if (firebaseUser) {
+
+                    database.ref(firebaseUser.uid).update({
+                        injury: injury,
+                        num: num,
+                        gender: gender,
+                        range: range,
+                        searchResults: searchResults
+                    });
+                }
+
+            });
+        }
+
+    });
 
     //Clears all of the text-boxes
   $("#input-symptoms").val("");
@@ -161,8 +167,21 @@ btnSignUp.on("click", function(event) {
         var errorCode = error.code;
         var errorMessage = error.message;
 
-        console.log(errorMessage);
-        // ...
+        switch(errorCode) {
+
+            case "auth/email-already-in-use":
+
+                $.prompt("Sorry! There is already an user with this e-mail!");
+                $("#txtEmail").val("");
+                $("#txtPassword").val("");
+
+            case "auth/invalid-email":
+
+                $.prompt("Please use a valid e-mail");
+                $("#txtEmail").val("");
+                $("#txtPassword").val("");
+        }
+
     });
 
     firebase.auth().onAuthStateChanged(firebaseUser => {
@@ -193,23 +212,21 @@ btnLogin.on("click", function(event) {
         var errorCode = error.code;
         var errorMessage = error.message;
 
-        console.log(errorMessage);
-        // ...
-    });
+        switch(errorCode) {
 
+            case "auth/wrong-password":
 
+                $.prompt("Wrong password. Please try again.");
+                $("#txtEmail").val("");
+                $("#txtPassword").val("");
 
-    firebase.auth().onAuthStateChanged(firebaseUser => {
+            case "auth/user-not-found":
 
-        if(firebaseUser) {
-
-
+                $.prompt("No users with this email were found.");
+                $("#txtEmail").val("");
+                $("#txtPassword").val("");
         }
-
     });
-
-
-
 });
 
 btnLogout.on("click", function() {
@@ -222,19 +239,13 @@ btnLogout.on("click", function() {
     firebase.auth().signOut();
 
     $(".box-search").slideToggle();
-    // console.log("not logged in");
-    // btnLogout.addClass("d-none");
-    // btnLogin.removeClass("d-none");
-    // btnSignUp.removeClass("d-none");
-    // $(".box-email").show();
-    // $(".box-password").show();
     
 });
 
+// Whenever a Firebase Authentication is changed (either with logging in or signing up, the if statement happens
 firebase.auth().onAuthStateChanged(firebaseUser => {
-    if(firebaseUser) {	+
-        // console.log(firebaseUser);
-            btnLogin.addClass("d-none");
+    if(firebaseUser) {
+        btnLogin.addClass("d-none");
         btnSignUp.addClass("d-none");
         btnLogout.removeClass("d-none");
         $(".box-email").hide();
@@ -244,16 +255,56 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         welcome.text("Greetings, " +firebaseUser.email+"!");
         welcome.addClass("welcome");
         $(welcome).insertBefore("#btnLogout");
+
+        var lastSearch = "";
+
+        // Getting data from Firebase database
+        database.ref(firebaseUser.uid).on("value", function(snapshot) {
+
+            if (typeof snapshot.val().searchResults !== "undefined") {
+
+                lastSearch = "Your last search was about <b>" +snapshot.val().injury + "</b>, maximum number of <b>"+snapshot.val().num +"</b> doctors, all <b>"+ snapshot.val().gender +"</b> within <b>"+ snapshot.val().range +"</b> miles.";
+
+                var last = $("<p>");
+                last.addClass("last");
+                last.html(lastSearch);
+
+                last.insertBefore("#btnLogout");
+
+                var buttonLast = $("<button>");
+                buttonLast.addClass("btn btn-success btnLastResult");
+                buttonLast.attr("type", "button");
+
+                buttonLast.text("See results for the last search");
+                buttonLast.insertBefore($("#btnLogout"));
+                $("<br><br>").insertBefore($("#btnLogout"));
+
+                $(document).on("click", ".btnLastResult", function () {
+
+                    $("tbody").html();
+                    $("tbody").html(snapshot.val().searchResults);
+
+                });
+
+            }
+
+            // If any errors are experienced, log them to console.
+        }, function(errorObject) {
+            console.log("The read failed: " + errorObject.code);
+        });
+
         $.prompt("Welcome back, " +firebaseUser.email+"!");
+
     } else {
-        console.log("not logged in");
         btnLogout.addClass("d-none");
         btnLogin.removeClass("d-none");
         btnSignUp.removeClass("d-none");
         $(".box-email").show();
         $(".box-password").show();
         $(".welcome").remove();
-        $.prompt("See you soon!");
+        $(".last").remove();
+        $(".btnLastResult").remove();
+
     }
 });
 
