@@ -99,71 +99,69 @@
         </div>
         <div class="container box-search">
             <form>
-            <div class="form-row">
-                <div class="form-group col">
-                    <label for="inputEmail4">Symptoms</label>
-                    <input type="text" class="form-control" id="input-symptoms" placeholder="e.g Ankle strain">
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="inputEmail4">Symptoms</label>
+                        <input type="text" class="form-control" id="input-symptoms" placeholder="e.g Ankle strain">
+                    </div>
+                    <div class="form-group col">
+                        <label for="numberOfDoc">Number Of Doctors to Display</label>
+                        <input type="number" class="form-control" id="number-Of-Doc" placeholder="e.g. 5">
+                    </div>
+                    <div class="form-group col">
+                        <label for="range">Range Of Search (miles)</label>
+                        <input type="number" class="form-control" id="search-input" placeholder="e.g 5">
+                    </div>
                 </div>
-                <div class="form-group col">
-                    <label for="numberOfDoc">Number Of Doctors to Display</label>
-                    <input type="number" class="form-control" id="number-Of-Doc" placeholder="e.g. 5">
-                </div>
-                <div class="form-group col">
-                    <label for="range">Range Of Search (miles)</label>
-                    <input type="number" class="form-control" id="search-input" placeholder="e.g 5">
-                </div>
-            </div>
 <!--                 <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="gender">Gender of Physician (male or female)</label>
                     <input type="text" class="form-control" id="gender-input" placeholder="e.g male">
                 </div>
-            </div> -->
-            <div class="form-row">
-                <div class= "col-md-6">
-                    <label>Gender of Physician</label>
-                    <select class="custom-select" id="gender-input"required>
-                        <option value="male"></option>
-                        <option value="female">Female</option>
-                        <option value="male">Male</option>
-                    </select>
+                </div> -->
+                <div class="form-row">
+                    <div class= "col-md-6">
+                        <label>Gender of Physician</label>
+                        <select class="custom-select" id="gender-input"required>
+                            <option value="male"></option>
+                            <option value="female">Female</option>
+                            <option value="male">Male</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Sort By</label>
+                        <select class="custom-select" id="sort-input" required>
+                        <option value="distance-desc"></option>
+                        <option value="full-name-asc">Full Name Ascending</option>
+                        <option value="full-name-desc">Full Name Descending</option>
+                        <option value="last-name-asc">Last Name Ascending</option>
+                        <option value="last-name-desc">Last Name Descending</option>
+                        <option value="first-name-asc">First Name Ascending</option>
+                        <option value="first-name-desc">First Name Descending</option>
+                        <option value="best-match-asc">Best Match Ascending</option>
+                        <option value="best-match-desc">Best Match Descending</option>
+                        <option value="rating-asc">Rating Ascending</option>
+                        <option value="rating-desc">Rating Descending</option>
+                        <option value="distance-asc">Distance Ascending</option>
+                        <option value="distance-desc">Distance Descending</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <label>Sort By</label>
-                    <select class="custom-select" id="sort-input" required>
-                    <option value="distance-desc"></option>
-                    <option value="full-name-asc">Full Name Ascending</option>
-                    <option value="full-name-desc">Full Name Descending</option>
-                    <option value="last-name-asc">Last Name Ascending</option>
-                    <option value="last-name-desc">Last Name Descending</option>
-                    <option value="first-name-asc">First Name Ascending</option>
-                    <option value="first-name-desc">First Name Descending</option>
-                    <option value="best-match-asc">Best Match Ascending</option>
-                    <option value="best-match-desc">Best Match Descending</option>
-                    <option value="rating-asc">Rating Ascending</option>
-                    <option value="rating-desc">Rating Descending</option>
-                    <option value="distance-asc">Distance Ascending</option>
-                    <option value="distance-desc">Distance Descending</option>
-                    </select>
+                <!--<div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="sort">Sort in Descending Order By (best-match-desc, rating-desc, distance-asc)</label>
+                        <input type="text" class="form-control" id="sort-input" placeholder="e.g best-match-desc">
+                    </div>
+                </div> -->
+                <br>
+                <div class="form-row">
+                    <div class="col-6 text-center">
+                        <button type="submit" class="btn btn-primary" id="btn-submit">Find Doctors near you</button>
+                    </div>
+                    <div class="col-6 text-center">
+                        <button type="submit" class="btn btn-primary" id="btn-clear">Clear Search</button>
+                    </div>
                 </div>
-            </div>
-<!--        <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="sort">Sort in Descending Order By (best-match-desc, rating-desc, distance-asc)</label>
-                    <input type="text" class="form-control" id="sort-input" placeholder="e.g best-match-desc">
-                </div>
-            </div> -->
-            <br>
-            <div class="form-row">
-                <div class="col-6 text-center">
-                    <button type="submit" class="btn btn-primary" id="btn-submit">Find Doctors near you</button>    
-                </div>
-                <div class="col-6 text-center">
-                    <button type="submit" class="btn btn-primary" id="btn-clear">Clear Search</button>    
-                </div>    
-    
-              </div>
-
                 <div class="modal hide" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false">
                     <div class="modal-header">
                         <h1>Loading...</h1>
@@ -173,10 +171,9 @@
                             <img src="assets/images/ajax-loader.gif">
                         </div>
                     </div>
-                </div>       
-            <br>
-            
-        </form>
+                </div>
+                <br>
+            </form>
             <div class="col-lg-12 table-result">
                 <div class=" panel-primary">
                     <div class="panel-heading">
@@ -201,7 +198,7 @@
                 </div>
             </div>
             <div class="maps"></div>
-    </div>
+        </div>
     </main>
     <footer>
         <div class="container-fluid">
