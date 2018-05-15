@@ -108,7 +108,9 @@ var betterDoctor = function(position){
             number = formatPhoneNumber(numberFormatted);
             number = "<a href='tel:"+numberFormatted+"'>"+number+"</a>";
         }
-        //https://www.google.com/maps/dir/?api=1&origin=47.5951518,-122.3316393&destination=37.65317,-120.9744
+
+        // Formatting the address so the link can point straight to Google Maps, showing the directions to the doctor's place
+        //TODO: Change the location API to Geolocation after presentation
         var location = "<a target='_blank' href='https://www.google.com/maps/dir/?api=1&origin="+lat+","+lng+"&destination="+response.data[i].practices[0].lat+","+response.data[i].practices[0].lon+"'>"+ response.data[i].practices[0].visit_address.street + " " + response.data[i].practices[0].visit_address.city + ", " + response.data[i].practices[0].visit_address.state +  " " + response.data[i].practices[0].visit_address.zip +"</a>";
 
         searchResults += "<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + response.data[i].specialties[0].description + "</td><td>"+location+"</td><td>" + number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + website + "</td></tr>";
@@ -138,43 +140,6 @@ var betterDoctor = function(position){
 }
 
 
-// var googleMaps = function(){
-
-//   var key = "AIzaSyCOBLdLofHakTbDCusqPvCHIFPp8kf8SvM"
-
-//   var queryURL =
-
-//    $.ajax({
-//     url: queryURL,
-//     method: "GET"
-//   }).then(function(response){
-
-//     console.log(response);
-
-//   });
-// }
-
-
-
-
-
-// var betterDoctorPractice = function (name, lat, lng, range, num, key, sort, count){
-//   var queryURL = "https:api.betterdoctor.com/2016-03-01/practices?name=" + name + "&location=" + lat + "," + lng + "," + range + "user_location=" + lat + "," + lng + "&skip=0&limit=" + num + "&user_key=" +key + "&sort=" + sort;
-
-//    $.ajax({
-//     url: queryURL,
-//     method: "GET"
-//   }).then(function(response){
-
-//     console.log(response);
-
-//     //  for(var i=0; i< response.meta.count; i++){
-//     //   $("#table-list > tbody").append("<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + response.data[i].specialties[0].description + "</td><td>" + response.data[i].practices[0].visit_address.street + " " + response.data[i].practices[0].visit_address.city + ", " + response.data[i].practices[0].visit_address.state +  " " + response.data[i].practices[0].visit_address.zip + "</td><td>" + response.data[i].practices[0].phones[0].number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + response.data[i].practices[0].website + "</td></tr>");
-//     // }
-
-//   });
-// }
-
 btnSignUp.on("click", function(event) {
 
     event.preventDefault();
@@ -199,6 +164,8 @@ btnSignUp.on("click", function(event) {
             database.ref(firebaseUser.uid).set({
                 email: firebaseUser.email
             });
+
+            $.prompt("Welcome, " +firebaseUser.email+"!");
         }
 
     });
@@ -228,7 +195,8 @@ btnLogin.on("click", function(event) {
 
             database.ref(firebaseUser.uid).on("value", function(snapshot) {
 
-                console.log("Welcome, " +snapshot.val().email);
+                // console.log("Welcome, " +snapshot.val().email);
+                $.prompt("Welcome back, " +firebaseUser.email+"!");
                 // btnLogin.addClass("d-none");
                 // btnSignUp.addClass("d-none");
                 // btnLogout.removeClass("d-none");
@@ -273,7 +241,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         $(".box-email").hide();
         $(".box-password").hide();
         $(".box-search").slideToggle();
-        $("html, body").animate({ scrollTop: $('.box-search').offset().top }, 1000);
     } else {
         console.log("not logged in");
         btnLogout.addClass("d-none");
