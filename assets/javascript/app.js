@@ -77,6 +77,7 @@ var betterDoctor = function(position){
 
   var queryURL = "https://api.betterdoctor.com/2016-03-01/doctors?query=" + injury + "&location=" + lat + "," + lng + "," + range + "&user_location=" + lat + "," + lng +  "&skip=0&gender=" + gender + "&sort=" + sort + "&limit=" + num + "&user_key=" + key;
 
+
   $.ajax({
     url: queryURL,
     method: "GET"
@@ -122,6 +123,10 @@ var betterDoctor = function(position){
             if(firebaseUser) {
 
                 database.ref(firebaseUser.uid).update({
+                    injury: injury,
+                    num: num,
+                    gender: gender,
+                    range:range,
                     searchResults: searchResults
                 });
             }
@@ -214,19 +219,12 @@ btnLogout.on("click", function() {
     firebase.auth().signOut();
 
     $(".box-search").slideToggle();
-    // console.log("not logged in");
-    // btnLogout.addClass("d-none");
-    // btnLogin.removeClass("d-none");
-    // btnSignUp.removeClass("d-none");
-    // $(".box-email").show();
-    // $(".box-password").show();
     
 });
 
 firebase.auth().onAuthStateChanged(firebaseUser => {
-    if(firebaseUser) {	+
-        // console.log(firebaseUser);
-            btnLogin.addClass("d-none");
+    if(firebaseUser) {
+        btnLogin.addClass("d-none");
         btnSignUp.addClass("d-none");
         btnLogout.removeClass("d-none");
         $(".box-email").hide();
@@ -236,7 +234,51 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         welcome.text("Greetings, " +firebaseUser.email+"!");
         welcome.addClass("welcome");
         $(welcome).insertBefore("#btnLogout");
+
+        var lastSearch = "";
+        // console.log(firebaseUser);
+
+        database.ref(firebaseUser.uid).on("value", function(snapshot) {
+
+            if (typeof snapshot.val().searchResults !== "undefined") {
+
+                lastSearch = "Your last search was about <b>" +snapshot.val().injury + "</b>, maximum number of <b>"+snapshot.val().num +"</b> doctors, all <b>"+ snapshot.val().gender +"</b> within <b>"+ snapshot.val().range +"</b> miles.";
+
+                var last = $("<p>");
+                last.addClass("last");
+                last.html(lastSearch);
+
+                last.insertBefore("#btnLogout");
+
+                var buttonLast = $("<button>");
+                buttonLast.addClass("btn btn-success btnLastResult");
+                buttonLast.attr("type", "button");
+
+                buttonLast.text("See results for the last search");
+                buttonLast.insertBefore($("#btnLogout"));
+                $("<br><br>").insertBefore($("#btnLogout"));
+
+                $(document).on("click", ".btnLastResult", function () {
+
+                    $("tbody").html();
+                    $("tbody").html(snapshot.val().searchResults);
+
+                });
+
+            }
+            // Print the initial data to the console.
+            console.log(snapshot.val());
+
+            // Change the HTML
+            // $("#displayed-data").text(snapshot.val().name + " | " + snapshot.val().age + " | " + snapshot.val().phone);
+
+            // If any errors are experienced, log them to console.
+        }, function(errorObject) {
+            console.log("The read failed: " + errorObject.code);
+        });
+
         $.prompt("Welcome back, " +firebaseUser.email+"!");
+
     } else {
         console.log("not logged in");
         btnLogout.addClass("d-none");
@@ -245,7 +287,9 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
         $(".box-email").show();
         $(".box-password").show();
         $(".welcome").remove();
-        $.prompt("See you soon!");
+        $(".last").remove();
+        $(".btnLastResult").remove();
+
     }
 });
 
