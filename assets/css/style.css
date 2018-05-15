@@ -32,20 +32,13 @@ body {
      position: relative;
 
  }
-  
- .slide-show{
-     height: 500px;
-     background: url("../images/heart-and-stethoscope-1.jpg");
-     background-repeat: no-repeat;
-     background-size: 100% 100%;
- }
 
  form{
      margin-bottom: 30px;
  }
 
  .carousel-caption h3, .carousel-control-prev-icon, .carousel-control-next-icon {
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
  }
 
  .carousel-control-next-icon, .carousel-control-prev-icon {
