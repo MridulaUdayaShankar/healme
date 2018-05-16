@@ -1,7 +1,7 @@
 # healme
 UCBCB Project 1
 
-- __C:\Users\gusta\Documents\projects\healme__
+- __Heal.Me__
   - [index.html](index.html)
   - __assets__
     - __css__
@@ -16,7 +16,6 @@ UCBCB Project 1
       - [ajax-loader.gif](assets/images/ajax-loader.gif)
       - [87434381-80c4-4aff-a3bd-2a9b7ce9d201.png](assets/images/87434381-80c4-4aff-a3bd-2a9b7ce9d201.png)
       - [pattern.jpg](assets/images/pattern.jpg)
-      - [Image uploaded from iOS.jpg](assets/images/Image uploaded from iOS.jpg)
     - __javascript__
       - [app.js](assets/javascript/app.js)
       - [js.js](assets/javascript/js.js)
@@ -27,9 +26,6 @@ UCBCB Project 1
           - [jquery-impromptu.js](assets/javascript/plugins/impromptu/jquery-impromptu.js)
       - [script.js](assets/javascript/script.js)
   - [LICENSE](LICENSE)
-  - [list.md](list.md)
   - [README.md](README.md)
-  - [test-effects.html](test-effects.html)
-  - [test-firebase.html](test-firebase.html)
   - [test.html](test.html)
 
