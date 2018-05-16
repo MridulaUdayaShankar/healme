@@ -11,8 +11,11 @@ Heal.me is an app which allows users the freedom to travel in peace that for the
 
 ## Built using:
 
-### HTML, CSS, Javascript, jQuery, Bootstrap, Better Doctor API, IP Locator API, Firebase, Impromptu JS & CSS Library, Loader GIF
+HTML, CSS, Javascript, jQuery, Bootstrap, Better Doctor API, IP Locator API, Firebase, Impromptu JS & CSS Library, Loader GIF
 
 ## Built and Maintained by:
 
 ### Roberto Baldizon, Gustavo Gibo, Lesley Banadzem
+
+## Additional Resouces:
+Users can get further help in w3shcools or MDN or stockoverflow.
