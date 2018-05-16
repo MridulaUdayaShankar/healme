@@ -3,7 +3,7 @@ UCBCB Project 1
 
 # Brief Description
 
-Heal.me Web is an app that connects patients to expert physicians who can help them with their current situation within a specified range of search.
+Heal.me is an app that connects patients to expert physicians who can help them with their current situation within a specified range of search.
 
 # Technologies
 
