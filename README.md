@@ -1,3 +1,4 @@
+
 # heal.me
 
 ![logo](assets/images/2a32a7eb-1506-468b-a3bf-bb2798051cb4.png)
@@ -27,4 +28,3 @@ Heal.me is an app which allows users the freedom to travel in peace that for the
 ** Roberto Baldizon
 ** Gustavo Gibo
 ** Lesley Banadzem
-
