@@ -1,6 +1,3 @@
-# healme
-UCBCB Project 1
-
 - __C:\Users\gusta\Documents\projects\healme__
   - [index.html](index.html)
   - __assets__
