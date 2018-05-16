@@ -23,7 +23,7 @@ var audio = new Audio('assets/images/bossanova.mp3');
 
 // Button Listener
 $("#btn-submit").on("click", function() {
-  // console.log("hello")
+    // console.log("hello")
     event.preventDefault();
 
     getLocation();
@@ -34,48 +34,48 @@ $("#btn-submit").on("click", function() {
 });
 
 $("#btn-clear").on("click", function() {
-  // console.log("bye")
-  event.preventDefault();
+    // console.log("bye")
+    event.preventDefault();
 
-  window.location.reload();
+    window.location.reload();
 
 });
 
 
 var getLocation = function(){
 
-  // if (navigator.geolocation){
-  //   navigator.geolocation.getCurrentPosition(betterDoctor);
-  // }else{
-  //   alert("Geolocation is not supported by this browser.");
-  // }
+    // if (navigator.geolocation){
+    //   navigator.geolocation.getCurrentPosition(betterDoctor);
+    // }else{
+    //   alert("Geolocation is not supported by this browser.");
+    // }
 
-  $.get("https://freegeoip.net/json/", function(res){
-      betterDoctor(res);
-  }, "jsonp");
+    $.get("https://freegeoip.net/json/", function(res){
+        betterDoctor(res);
+    }, "jsonp");
 
 }
 
 
 var betterDoctor = function(position){
-  
-  var key = "bc7f67f5ab920635890a971a98eac05e";
 
-  var lat = position.latitude.toFixed(3);
+    var key = "bc7f67f5ab920635890a971a98eac05e";
 
-  var lng = position.longitude.toFixed(3);
+    var lat = position.latitude.toFixed(3);
 
-  var range = $("#search-input").val().trim();
+    var lng = position.longitude.toFixed(3);
 
-  var num = $("#number-Of-Doc").val().trim();
+    var range = $("#search-input").val().trim();
 
-  var injury = $("#input-symptoms").val().trim();
+    var num = $("#number-Of-Doc").val().trim();
 
-  var gender = $("#gender-input").val().trim();
+    var injury = $("#input-symptoms").val().trim();
 
-  var sort = $("#sort-input").val().trim();
+    var gender = $("#gender-input").val().trim();
 
-  var queryURL = "https://api.betterdoctor.com/2016-03-01/doctors?query=" + injury + "&location=" + lat + "," + lng + "," + range + "&user_location=" + lat + "," + lng +  "&skip=0&gender=" + gender + "&sort=" + sort + "&limit=" + num + "&user_key=" + key;
+    var sort = $("#sort-input").val().trim();
+
+    var queryURL = "https://api.betterdoctor.com/2016-03-01/doctors?query=" + injury + "&location=" + lat + "," + lng + "," + range + "&user_location=" + lat + "," + lng +  "&skip=0&gender=" + gender + "&sort=" + sort + "&limit=" + num + "&user_key=" + key;
 
 
     $.ajax({
@@ -146,11 +146,11 @@ var betterDoctor = function(position){
     });
 
     //Clears all of the text-boxes
-  $("#input-symptoms").val("");
-  $("#number-Of-Doc").val("");
-  $("#search-input").val("");
-  $("#sort-input").val("");
-  $("#gender-input").val("");
+    $("#input-symptoms").val("");
+    $("#number-Of-Doc").val("");
+    $("#search-input").val("");
+    $("#sort-input").val("");
+    $("#gender-input").val("");
 }
 
 
@@ -239,7 +239,7 @@ btnLogout.on("click", function() {
     firebase.auth().signOut();
 
     $(".box-search").slideToggle();
-    
+
 });
 
 // Whenever a Firebase Authentication is changed (either with logging in or signing up, the if statement happens
@@ -263,6 +263,8 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
             if (typeof snapshot.val().searchResults !== "undefined") {
 
+                $(".last").remove();
+
                 lastSearch = "Your last search was about <b>" +snapshot.val().injury + "</b>, maximum number of <b>"+snapshot.val().num +"</b> doctors, all <b>"+ snapshot.val().gender +"</b> within <b>"+ snapshot.val().range +"</b> miles.";
 
                 var last = $("<p>");
@@ -270,6 +272,8 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 last.html(lastSearch);
 
                 last.insertBefore("#btnLogout");
+
+                $(".btnLastResult").remove();
 
                 var buttonLast = $("<button>");
                 buttonLast.addClass("btn btn-success btnLastResult");
@@ -313,6 +317,5 @@ function formatPhoneNumber(s) {
     var m = s2.match(/^(\d{3})(\d{3})(\d{4})$/);
     return (!m) ? null : "(" + m[1] + ") " + m[2] + "-" + m[3];
 }
-
 
 
