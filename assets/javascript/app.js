@@ -83,7 +83,7 @@ var betterDoctor = function(position){
         method: "GET"
     }).then(function (response) {
 
-        console.log(response);
+        // console.log(response);
 
         audio.pause();
 
@@ -91,41 +91,94 @@ var betterDoctor = function(position){
 
         var searchResults = "";
 
+        for(var j=0; j< response.meta.count; j++){
 
-        for (var i = 0; i < num-1; i++) {
+        var filteredElem = response.data[j].practices.filter(function(element){
+            return element.accepts_new_patients && element.within_search_area
+        })
 
-            // Validating the website value, to prevent showing undefined
-            var website = null;
-            if (typeof response.data[i].practices[0].website === "undefined" || response.data[i].practices[0].website === null) {
-                website = "-----";
-            } else {
-                website = "<a href='" + response.data[i].practices[0].website + "' target='_blank'>Access here</a>";
-            }
+        console.log(filteredElem)
 
-            //Validating the phone number, putting a mask on it, to show it better (999)-999-9999 and also making in to show only landline numbers, not faxes
-            var number = "No number";
-            var numberFormatted = parseInt(response.data[i].practices[0].phones[0].number);
+        // Validating the website value, to prevent showing undefined
+        var practicesWebsite = filteredElem.filter(function(element){
+            return element.website !== "undefined";
+        })
 
-            if (response.data[i].practices[0].phones[0].type == "landline") {
-                number = formatPhoneNumber(numberFormatted);
-                number = "<a href='tel:" + numberFormatted + "'>" + number + "</a>";
-            }
+        var practicesPhones = practicesWebsite.phones.filter(function(element){
+            return element.type === "landline";
+        })
 
-            //Validate Specialty Description Text
-            var specialties = null;
-            if (typeof response.data[i].specialties[0].description === "undefined" || response.data[i].specialties[0].description === null) {
-                specialties = "-----";
-            } else {
-                specialties = response.data[i].specialties[0].description;
-            }
+
+        // if (typeof filteredElem.website === "undefined" || response.data[i].practices[0].website === null) {
+        //         website = "-----";
+        //     } else {
+        //         website = "<a href='" + response.data[i].practices[0].website + "' target='_blank'>Access here</a>";
+        //     }
+
+        //     //Validating the phone number, putting a mask on it, to show it better (999)-999-9999 and also making in to show only landline numbers, not faxes
+        //     var number = "No number";
+        //     var numberFormatted = parseInt(response.data[i].practices[0].phones[0].number);
+
+        //     if (response.data[i].practices[0].phones[0].type == "landline") {
+        //         number = formatPhoneNumber(numberFormatted);
+        //         number = "<a href='tel:" + numberFormatted + "'>" + number + "</a>";
+        //     }else{
+        //         number = "-----";
+        //     }
+
+        //     //Validate Specialty Description Text
+        //     var specialties = null;
+        //     if (typeof response.data[i].specialties[0].description === "undefined" || response.data[i].specialties[0].description === null) {
+        //         specialties = "-----";
+        //     } else {
+        //         specialties = response.data[i].specialties[0].description;
+        //     }
+
+        // }
+
+
+        for (var i = 0; i < num-1 ; i++) {
+
+        // var filteredElem = response.data[i].practices.filter(function(element){
+        //     return element.accepts_new_patients && element.within_search_area
+        // })
+
+        // console.log(filteredElem)
+
+            // // Validating the website value, to prevent showing undefined
+            // var website = null;
+            // if (typeof response.data[i].practices[0].website === "undefined" || response.data[i].practices[0].website === null) {
+            //     website = "-----";
+            // } else {
+            //     website = "<a href='" + response.data[i].practices[0].website + "' target='_blank'>Access here</a>";
+            // }
+
+            // //Validating the phone number, putting a mask on it, to show it better (999)-999-9999 and also making in to show only landline numbers, not faxes
+            // var number = "No number";
+            // var numberFormatted = parseInt(response.data[i].practices[0].phones[0].number);
+
+            // if (response.data[i].practices[0].phones[0].type == "landline") {
+            //     number = formatPhoneNumber(numberFormatted);
+            //     number = "<a href='tel:" + numberFormatted + "'>" + number + "</a>";
+            // }else{
+            //     number = "-----";
+            // }
+
+            // //Validate Specialty Description Text
+            // var specialties = null;
+            // if (typeof response.data[i].specialties[0].description === "undefined" || response.data[i].specialties[0].description === null) {
+            //     specialties = "-----";
+            // } else {
+            //     specialties = response.data[i].specialties[0].description;
+            // }
 
             // Formatting the address so the link can point straight to Google Maps, showing the directions to the doctor's place
             //TODO: Change the location API to Geolocation after presentation
             var location = "<a target='_blank' href='https://www.google.com/maps/dir/?api=1&origin=" + lat + "," + lng + "&destination=" + response.data[i].practices[0].lat + "," + response.data[i].practices[0].lon + "'>" + response.data[i].practices[0].visit_address.street + " " + response.data[i].practices[0].visit_address.city + ", " + response.data[i].practices[0].visit_address.state + " " + response.data[i].practices[0].visit_address.zip + "</a>";
 
-            searchResults += "<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + specialties + "</td><td>" + location + "</td><td>" + number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + website + "</td></tr>";
+            searchResults += "<tr><td>" + practicesPhones.data[i].profile.first_name + " " + practicesPhones.data[i].profile.last_name + ", " + practicesPhones.data[i].profile.title + "</td><td>" + "" + "</td><td>" + location + "</td><td>" +  + "</td><td>" + practicesPhones.data[i].practices[0].distance.toFixed(2) + "</td><td>" + practicesWebsite.website + "</td></tr>";
 
-            $("#table-list > tbody").append("<tr><td>" + response.data[i].profile.first_name + " " + response.data[i].profile.last_name + ", " + response.data[i].profile.title + "</td><td>" + specialties + "</td><td>" + location + "</td><td>" + number + "</td><td>" + response.data[i].practices[0].distance.toFixed(2) + "</td><td>" + website + "</td></tr>");
+            $("#table-list > tbody").append("<tr><td>" + practicesPhones.data[i].profile.first_name + " " + practicesPhones.data[i].profile.last_name + ", " + practicesPhones.data[i].profile.title + "</td><td>" + "" + "</td><td>" + location + "</td><td>" +  + "</td><td>" + practicesPhones.data[i].practices[0].distance.toFixed(2) + "</td><td>" + practicesWebsite.website + "</td></tr>");
 
             firebase.auth().onAuthStateChanged(firebaseUser => {
 
@@ -143,7 +196,7 @@ var betterDoctor = function(position){
             });
         }
 
-    });
+    }
 
     //Clears all of the text-boxes
   $("#input-symptoms").val("");
@@ -151,7 +204,7 @@ var betterDoctor = function(position){
   $("#search-input").val("");
   $("#sort-input").val("");
   $("#gender-input").val("");
-}
+})
 
 
 btnSignUp.on("click", function(event) {
