@@ -1,4 +1,4 @@
-- __C:\Users\gusta\Documents\projects\healme__
+- __Heal.Me__
   - [index.html](index.html)
   - __assets__
     - __css__
