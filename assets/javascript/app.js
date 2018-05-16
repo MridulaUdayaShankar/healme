@@ -281,7 +281,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
                 buttonLast.text("See results for the last search");
                 buttonLast.insertBefore($("#btnLogout"));
-                $("<br><br>").insertBefore($("#btnLogout"));
 
                 $(document).on("click", ".btnLastResult", function () {
 

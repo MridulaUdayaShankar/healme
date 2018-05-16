@@ -119,3 +119,8 @@ body {
  .last {
      color: #fff;
  }
+
+ .btnLastResult {
+     display: block;
+     margin: 0 auto;
+ }
