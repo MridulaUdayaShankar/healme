@@ -1,31 +1,30 @@
-# healme
-UCBCB Project 1
+# heal.me
 
-- __Heal.Me__
-  - [index.html](index.html)
-  - __assets__
-    - __css__
-      - [style.css](assets/css/style.css)
-    - __images__
-      - [1.jpg](assets/images/1.jpg)
-      - [2.jpg](assets/images/2.jpg)
-      - [2a32a7eb-1506-468b-a3bf-bb2798051cb4.png](assets/images/2a32a7eb-1506-468b-a3bf-bb2798051cb4.png)
-      - [3.jpg](assets/images/3.jpg)
-      - [4.jpg](assets/images/4.jpg)
-      - [bossanova.mp3](assets/images/bossanova.mp3)
-      - [ajax-loader.gif](assets/images/ajax-loader.gif)
-      - [87434381-80c4-4aff-a3bd-2a9b7ce9d201.png](assets/images/87434381-80c4-4aff-a3bd-2a9b7ce9d201.png)
-      - [pattern.jpg](assets/images/pattern.jpg)
-    - __javascript__
-      - [app.js](assets/javascript/app.js)
-      - [js.js](assets/javascript/js.js)
-      - [effects.js](assets/javascript/effects.js)
-      - __plugins__
-        - __impromptu__
-          - [jquery-impromptu.css](assets/javascript/plugins/impromptu/jquery-impromptu.css)
-          - [jquery-impromptu.js](assets/javascript/plugins/impromptu/jquery-impromptu.js)
-      - [script.js](assets/javascript/script.js)
-  - [LICENSE](LICENSE)
-  - [README.md](README.md)
-  - [test.html](test.html)
+![logo](assets/images/2a32a7eb-1506-468b-a3bf-bb2798051cb4.png)
+
+Heal.me is an app which allows users the freedom to travel in peace that for they will be able to receive the best healthcare available to them and locals. The app connects patients with Doctors and searches for specific symptons within a desired number of doctors and range of miles. With the information returned we would be able to help you sort out the best and closes doctors around one which accept your insurance. Heal.me makes it easy to use while being reliable, storing your results on Google's Firebase for future use. 
+
+## Try it out!
+
+[heal.me!]
+(https://b0bbybaldi.github.io/healme/)
+
+## Built using:
+
+** HTML
+** CSS
+** Javascript
+** jQuery
+** Bootstrap
+** Better Doctor API
+** IP Locator API
+** Firebase
+** Impromptu JS & CSS Library
+** Loader GIF
+
+## Built and Maintained by:
+
+** Roberto Baldizon
+** Gustavo Gibo
+** Lesley Banadzem
 
