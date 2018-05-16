@@ -1,6 +1,26 @@
 # healme
 UCBCB Project 1
 
+# Brief Description
+
+Heal.me Web is an app that connects patients to expert physicians who can help them with their current situation within a specified range of search.
+
+# Technologies
+
+* HTML5
+* CSS3
+* Bootstrap 4.0.0
+* Javascript
+* jQuery 3.3.1
+* jQuery Impromptu
+* Google Firebase for storing data and user Authentication
+* Better Doctor for API purposes
+* FreeGeoIp for getting the User's location
+
+# Link
+
+You can access the website without downloading any file by clicking [here](https://b0bbybaldi.github.io/healme/).
+
 - __Heal.Me__
   - [index.html](index.html)
   - __assets__
