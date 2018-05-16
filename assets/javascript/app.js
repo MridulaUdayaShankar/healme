@@ -263,6 +263,8 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
             if (typeof snapshot.val().searchResults !== "undefined") {
 
+                $(".last").remove();
+
                 lastSearch = "Your last search was about <b>" +snapshot.val().injury + "</b>, maximum number of <b>"+snapshot.val().num +"</b> doctors, all <b>"+ snapshot.val().gender +"</b> within <b>"+ snapshot.val().range +"</b> miles.";
 
                 var last = $("<p>");
@@ -270,6 +272,8 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                 last.html(lastSearch);
 
                 last.insertBefore("#btnLogout");
+
+                $(".btnLastResult").remove();
 
                 var buttonLast = $("<button>");
                 buttonLast.addClass("btn btn-success btnLastResult");
